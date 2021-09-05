@@ -1,0 +1,181 @@
+@import 'colors';
+@import 'common';
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 $white-smoke; }
+}
+
+@keyframes cloud1 {
+    0% { 
+        left: -200%;
+    }
+
+    100% {
+        left: 62.5%;
+    }
+}
+
+@keyframes cloud2 {
+    0% { 
+        left: -200%;
+    }
+
+    100% {
+        left: 62.5%;
+    }
+}
+
+.container{
+    height: 100%;
+    background-color: $dark-secondary;
+
+    display: grid;
+    grid-template-rows: 12.5% 42.5% 45%;
+
+    header {
+        @extend .flex-center;
+
+        justify-content: space-evenly;
+
+        .searchBtn {
+            font-size: 16px;
+            height: 40px;
+            width: 160px;
+        }
+
+        .geolocBtn {
+            @extend .flex-center;
+
+            height: 40px;
+            width: 40px;
+            border-radius: 20px;
+        }
+
+        .searchBtn:hover, .searchBtn:focus, .geolocBtn:hover, .geolocBtn:focus {
+            animation: pulse 1s;
+            box-shadow: 0 0 0 2em rgba(#fff,0);
+        }
+    }
+
+    .stateIllustration {
+        position: relative;
+        width: 146%;
+
+        .weatherStateImage {
+            position: absolute;
+            top: 57.5%; 
+            left: 27.5%; 
+            transform: translate(-27.5%, -57.5%); 
+
+            width: 150px;
+            height: 200px;
+
+        }
+
+        .clouds {
+            position: absolute;
+            opacity: 5%;
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+            flex-direction: column;
+
+            .cloudGroup1, .cloudGroup2 {
+                display: flex;
+                height: 50%;
+            }
+
+            .cloud1 {
+                position: absolute;
+                animation: cloud1 15s infinite linear;
+            }
+
+            .cloud2 {
+                position: absolute;
+                animation: cloud2 20s infinite linear;
+                animation-delay: 1s;
+            }
+
+            .cloud3 {
+                position: absolute;
+                animation: cloud2 10s infinite linear;
+                animation-delay: 4s;
+            }
+
+            .cloud4 {
+                position: absolute;
+                animation: cloud2 20s infinite linear;
+                animation-delay: 2s;
+            }
+            
+        }
+
+
+    }
+
+    .weatherDesc {
+        display: grid;
+        grid-template-rows: 30% 30% 40%;
+
+        section {
+            @extend .flex-center;
+
+            color: $white-smoke;
+
+            .temperatureNumber::after {
+                content: attr(last-number);
+                font-size: 110px;
+                position: relative;
+                top: 5px;
+                left: 5px;
+            }
+
+            .temperatureNumber {
+                font-size: 100px;
+            }
+
+            .degree::after {
+                content: attr(degree-unit);
+                font-size: 40px;
+                color: $light-grey;
+                position: relative;
+                top: 10px;
+                left: 10px;
+            }
+
+            .degreeIcon {
+                position: relative;
+                top: -10px;
+                left: 10px;
+                font-size: 15px;
+            }
+
+            &.weatherState, .degreeIcon, &.metadata {
+                color: $light-grey;
+            }
+
+            &.metadata {
+                h3 {
+                    font-size: 18px;
+                }
+
+                .marker {
+                    position: relative;
+                    top: 3px;
+                    left: -5px;
+                    font-size: 18px;
+                }
+
+                .dot {
+                    padding: 20px;
+                }
+            }
+        }
+
+        .metadata {
+            @extend .flex-center;
+            flex-direction: column;
+        }
+    }
+}
