@@ -3,4 +3,56 @@
 .container{
     background-color: $dark-primary;
     z-index: 1;
+    color: $white-smoke;
+
+
+    display: grid;
+    grid-template-rows: min(0.5fr, 15%) min(1.25fr, 35%)  min(2.25fr, 50%);
+    grid-template-columns: 10% 90%;
+
+    header {
+        display: flex;
+        width: 90.5%;
+        justify-content: flex-end;
+        align-items: center;
+        .celciusBtn, .fahrenBtn {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+        grid-column-start: 2;
+        margin: 10px 0;
+    }
+    
+    .daysWeather {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        width: 90%;
+
+        grid-column-start: 2;
+        gap: 20px;
+    }
+
+    .highlights {
+        grid-column-start: 2;
+        
+        .cards {
+            display: grid;
+            width: 90%;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+        
+    }
+}
+
+
+@media only screen and (max-width: 768px) {
+    .container {
+        grid-template-rows: 0.1fr 1fr 1fr;
+    }
+    .highlights .cards {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))!important;
+    }
 }

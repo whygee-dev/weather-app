@@ -44,7 +44,7 @@ const LeftWidget: React.FC = () => {
                 width='150px' height='200px'
               />
             </div>
-          </div>
+          </div>  
         </div>
 
         <div className={styles.weatherStateImage}  >

@@ -30,10 +30,11 @@
     background-color: $dark-secondary;
 
     display: grid;
-    grid-template-rows: 12.5% 42.5% 45%;
+    grid-template-rows: 12.5vh 30vh 57.5vh;
 
     header {
         @extend .flex-center;
+
 
         justify-content: space-evenly;
 
@@ -59,14 +60,13 @@
 
     .stateIllustration {
         position: relative;
-        width: 146%;
+        width: 150%;
 
         .weatherStateImage {
             position: absolute;
-            top: 57.5%; 
-            left: 27.5%; 
-            transform: translate(-27.5%, -57.5%); 
-
+            left: calc(50% / 2);
+            transform: translateX(calc(-50% / 2));
+            
             width: 150px;
             height: 200px;
 
