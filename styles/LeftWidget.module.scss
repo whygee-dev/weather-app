@@ -1,10 +1,6 @@
 @import 'colors';
 @import 'common';
 
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 $white-smoke; }
-}
-
 @keyframes cloud1 {
     0% { 
         left: -200%;
@@ -63,12 +59,11 @@
         width: 150%;
 
         .weatherStateImage {
-            position: absolute;
-            left: calc(50% / 2);
-            transform: translateX(calc(-50% / 2));
-            
-            width: 150px;
-            height: 200px;
+            @extend .flex-center;
+
+            width: 67.5%;
+            height: 90%;
+
 
         }
 
@@ -85,6 +80,10 @@
                 display: flex;
                 height: 50%;
             }
+
+            .cloud1, .cloud2, .cloud3, .cloud4 {
+                left: -200%;
+            };
 
             .cloud1 {
                 position: absolute;
@@ -106,7 +105,7 @@
             .cloud4 {
                 position: absolute;
                 animation: cloud2 20s infinite linear;
-                animation-delay: 2s;
+                animation-delay: 8s;
             }
             
         }

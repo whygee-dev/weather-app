@@ -8,15 +8,12 @@ const useWeather = (coords: GeolocationCoordinates | undefined, unit: Unit): { w
 
     useEffect(() => {
         const fetchData = (async () => {
-            console.log(coords?.latitude);
-            console.log(coords?.longitude);
             try {
                 if (!coords?.latitude || !coords?.longitude) {
                     return;
                 }
 
-                const request = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${coords?.latitude}&lon=${coords?.longitude}&units=${unit === 'C' ? 'imperial' : 'metric'}&appid=${process.env.NEXT_PUBLIC_API_KEY}`
-                );
+                const request = await fetch(`${process.env.NEXT_PUBLIC_API}/weather?lat=${coords?.latitude}&lon=${coords?.longitude}&units=${unit === 'C' ? 'imperial' : 'metric'}`)
                 
                 const res = await request.json();
 

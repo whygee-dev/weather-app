@@ -2,6 +2,11 @@
 @import 'common';
 
 .container{
+    & div:first-of-type {
+        width: 80%!important;
+        height: 100%!important;
+    }
+
     background-color: $dark-secondary;
 
     @extend .flex-center;

@@ -9,14 +9,13 @@ import useWeather from '../hooks/useWeather'
 const Home: NextPage = () => {
   const location = useLocation();
   
-  /*const weather = useWeather(location?.coords, 'C');
+  const weather = useWeather(location?.coords, 'C');
 
-  console.log(weather);*/
-
+  
   return (
     <main className={styles.container}>
-      <LeftWidget></LeftWidget>
-      <RightWidget></RightWidget>
+      <LeftWidget/>
+      <RightWidget/>
     </main>
   )
 }
