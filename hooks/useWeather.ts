@@ -12,8 +12,6 @@ const useWeather = (coords: Coordinates | undefined, unit: Unit, date: Date): an
                 return;
             }
 
-            console.log('Fetched weather');
-
             const request = await fetch(`${process.env.NEXT_PUBLIC_API}/weather?lat=${coords?.latitude}&lon=${coords?.longitude}&units=${unit === 'C' ? 'metric' : 'imperial'}`)
             const res = await request.json();
 

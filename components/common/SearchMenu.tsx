@@ -19,7 +19,6 @@ const SearchMenu: React.FC<Props> = (props: Props) => {
         if (!props.searchWorker.current) return;
 
         props.searchWorker.current.onmessage = (e) => {
-            //console.log(`WebWorker Response => ${JSON.stringify(e.data)}`);
             setSearchResult(e.data);
         }
 

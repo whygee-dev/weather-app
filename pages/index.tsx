@@ -32,8 +32,6 @@ const Home: NextPage = () => {
 
   const currentWeather = weather?.current;
 
-  console.log(currentWeather);
-
   const highlights = {
     wind: currentWeather?.wind_speed, visibility: currentWeather?.visibility, 
     humidity: currentWeather?.humidity, pressure: currentWeather?.pressure,
@@ -78,7 +76,7 @@ const Home: NextPage = () => {
         </>
       )}
       <ErrorMessage message={weather?.error || state === 'denied' ? geolocWarning : undefined } errorDate={new Date()}/>
-      <LoadingIndicator visible={false} />
+      <LoadingIndicator visible={isLoading || state === 'prompt'} />
     </main>
   )
 }
