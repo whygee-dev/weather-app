@@ -1,4 +1,4 @@
-import styles from '../../styles/HighlightCard.module.scss'
+import styles from './styles/HighlightCard.module.scss'
 
 type Props = {
     title: string;
@@ -16,7 +16,9 @@ const HighlightCard: React.FC<Props> = (props: Props) => {
             <h4>{props.unit}</h4>  
         </div>
         
-        {props.widget}
+        <div className={styles.widget}>
+          {props.widget}
+        </div>
     </section>
   )
 }

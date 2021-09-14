@@ -1,4 +1,5 @@
 @import 'colors';
+@import 'common';
 
 .container{
     background-color: $dark-primary;
@@ -8,6 +9,7 @@
 
     display: grid;
     grid-template-columns: 10% 90%;
+    grid-template-rows: 12.5vh auto;
 
     header {
         display: flex;
@@ -15,10 +17,18 @@
         justify-content: flex-end;
         align-items: center;
         .celciusBtn, .fahrenBtn {
-            width: 40px;
-            height: 40px;
-            border-radius: 20px;
+            @extend .flex-center;
+            width: 35px;
+            height: 35px;
+            border-radius: 17.5px;
             margin-right: 10px;
+
+            font-size: 18px;
+            font-weight: 1000;
+            &.active {
+                background-color: $white-smoke !important;
+                color: $dark-primary;
+            }
         }
         grid-column-start: 2;
         margin: 10px 0;
@@ -42,16 +52,39 @@
             gap: 20px;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         }
-        
     }
+    .windOrientation {
+    }
+
 }
 
 
 @media only screen and (max-width: 768px) {
     .container {
-        grid-template-rows: 0.1fr 1fr 1fr;
-    }
-    .highlights .cards {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))!important;
+        grid-template-columns: 1% 99%;
+
+        header {
+            margin: auto;
+            width: 92.5%;
+            padding: 20px 5px 20px 0 ;
+        }
+
+        .daysWeather {
+            width: 92.5%!important;
+            margin: auto;
+        }
+
+        .highlights {
+            width: 92.5%!important;
+            margin: auto;
+            h2 {
+                text-align: center;
+            }
+            .cards {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))!important;
+                width: 100%!important;
+            }
+            
+        }
     }
 }

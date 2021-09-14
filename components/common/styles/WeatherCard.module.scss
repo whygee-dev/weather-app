@@ -1,0 +1,30 @@
+@import 'colors';
+@import 'common';
+
+.container{
+    & div:first-of-type {
+        width: 75%!important;
+        height: 100%!important;
+        max-width: 140px!important;
+    }
+
+    background-color: $dark-secondary;
+
+    @extend .flex-center;
+    flex-direction: column;
+
+    .minMaxTemp {
+        display: flex;
+        justify-content: space-between;
+        width: 65%;
+    }
+
+    h3, h4 {
+        font-weight: 500;
+        color: $white-smoke;
+    }
+
+    .min {
+        color: $light-grey;
+    }
+}

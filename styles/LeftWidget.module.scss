@@ -24,33 +24,44 @@
 .container{
     height: 100%;
     background-color: $dark-secondary;
-
+    position: relative;
+    max-height: 100vh;
     display: grid;
     grid-template-rows: 12.5vh 30vh 57.5vh;
 
     header {
         @extend .flex-center;
+        margin: auto;
+        width: 92.5%;
 
+        z-index: 3;
 
-        justify-content: space-evenly;
+        justify-content: space-between;
 
         .searchBtn {
             font-size: 16px;
-            height: 40px;
+            height: 35px;
             width: 160px;
         }
 
-        .geolocBtn {
-            @extend .flex-center;
+        .controlBtns {
+            display: flex;
+            justify-content: space-evenly;
+            width: 90px;
 
-            height: 40px;
-            width: 40px;
-            border-radius: 20px;
-        }
-
-        .searchBtn:hover, .searchBtn:focus, .geolocBtn:hover, .geolocBtn:focus {
-            animation: pulse 1s;
-            box-shadow: 0 0 0 2em rgba(#fff,0);
+            .geolocBtn, .refreshBtn {
+                @extend .flex-center;
+    
+                height: 35px;
+                width: 35px;
+                border-radius: 17.5px;
+            }
+            
+    
+            .searchBtn:hover, .searchBtn:focus, .geolocBtn:hover, .geolocBtn:focus, .refreshBtn:hover, .refreshBtn:focus {
+                animation: pulse 1s;
+                box-shadow: 0 0 0 2em rgba(#fff,0);
+            }
         }
     }
 
@@ -62,9 +73,7 @@
             @extend .flex-center;
 
             width: 67.5%;
-            height: 90%;
-
-
+            height: 80%;
         }
 
         .clouds {
@@ -152,6 +161,9 @@
 
             &.weatherState, .degreeIcon, &.metadata {
                 color: $light-grey;
+                h2 {
+                    text-transform: capitalize;
+                }
             }
 
             &.metadata {

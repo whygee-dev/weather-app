@@ -1,0 +1,15 @@
+@import 'colors';
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 $white-smoke; }
+}
+
+@keyframes pulse-blue {
+    0% { box-shadow: 0 0 0 0 $blue; }
+}

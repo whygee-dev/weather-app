@@ -14,6 +14,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "utils/rate-limit.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "utils/rate-limit.js", "search-worker/worker.js"],
   "exclude": ["node_modules"]
 }

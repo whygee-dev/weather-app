@@ -5,17 +5,48 @@ import RoomIcon from '@material-ui/icons/Room';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import { useEffect, useState } from 'react';
 import SearchMenu from '../common/SearchMenu';
+import RefreshIcon from '@material-ui/icons/Refresh';
+import { Unit } from '../../hooks/useWeather';
 
-const LeftWidget: React.FC = () => {
+type Props = {
+  temperature: string;
+  isLoading: boolean;
+  description: string;
+  city: string;
+  weatherIcon: string;
+  unit: Unit;
+  scrollTop?: number;
+  containerRef: React.MutableRefObject<any>;
+  searchWorker: React.MutableRefObject<Worker | undefined>;
+  changeCoords: (lon: number, lat: number) => any;
+  refresh: () => void;
+  useGeoloc: () => void;
+};
+
+const LeftWidget: React.FC<Props> = (props: Props) => {
   const [searchVisible, showSearch] = useState(false);
+  const [scrollTop, setScrollTop] = useState(0);
+  const today = new Date();
+
+  const onScroll = () => {
+    const main = props.containerRef.current;
+    setScrollTop(Math.min(window.innerHeight, main.scrollTop));
+  }
+
+  if (props.containerRef.current) {
+    props.containerRef.current.addEventListener('scroll', onScroll);
+  }
 
   return (
-    <section className={styles.container}>
+    <section className={styles.container} style={{top: window.innerWidth > 768 ? scrollTop : undefined}}>
       { !searchVisible ? (
       <>
         <header className={styles.header}>
           <button className={`btn ${styles.searchBtn}`} onClick={() => showSearch(true)}>Search for places</button>
-          <button className={`btn ${styles.geolocBtn}`}><GpsFixedIcon className="icon" /></button>
+          <section className={styles.controlBtns}>
+            <button className={`btn ${styles.geolocBtn}`} onClick={props.useGeoloc}><GpsFixedIcon className="icon" /></button>
+            <button className={`btn ${styles.refreshBtn}`} onClick={props.refresh}><RefreshIcon className="icon" /></button>
+          </section>
         </header>
 
         <section className={styles.stateIllustration}>
@@ -55,8 +86,8 @@ const LeftWidget: React.FC = () => {
 
           <div className={styles.weatherStateImage}  >
             <Image 
-              src="/09d.svg" alt="Weather Logo"
-              width='300%' height='500%' className={styles.weatherStateLogo}
+              src={`/${props.weatherIcon}.svg`} alt="Weather Logo"
+              width='250%' height='300%' className={styles.weatherStateLogo}
             />
           </div>
         </section>
@@ -64,24 +95,42 @@ const LeftWidget: React.FC = () => {
         <section className={styles.weatherDesc}>
           <section className={styles.temperature}>
             <h1>
-              <span className={styles.temperatureNumber} last-number="5">1</span>
-                <span className={styles.degree} degree-unit="C">
-                  <RadioButtonUncheckedIcon className={styles.degreeIcon} />
-                </span>
+              {!props.isLoading ?
+                (<>
+                  <span className={styles.temperatureNumber} last-number={props.temperature.slice(-1)}>
+                    {props.temperature.charAt(0)}
+                  </span>
+                  <span className={styles.degree} degree-unit={props.unit}>
+                    <RadioButtonUncheckedIcon className={styles.degreeIcon} />
+                  </span>
+                </>
+              ) : <span>Loading...</span>
+            }
             </h1>
           </section>
           <section className={styles.weatherState}>
-            <h2>Shower</h2>
+            {
+              !props.isLoading && <h2>{props.description}</h2> 
+            }
           </section>
           <section className={styles.metadata}>
-            <h4>Today <span className={styles.dot}>&#11827;</span> Fri. 5 Jun</h4>
-            <h3><RoomIcon className={styles.marker}/>Helsinki</h3>
+            <h4>Today 
+              <span className={styles.dot}>&#11827;</span> 
+              {
+              today.toString().substring(0, today.toString().indexOf(String(today.getFullYear())))
+              }
+            </h4>
+            <h3><RoomIcon className={styles.marker}/>{!props.isLoading ? props.city : "Loading.."}</h3>
           </section>
         </section>
         </>
-        ) : <SearchMenu database={[]} close={() => showSearch(false)} />}
+        ) : <SearchMenu database={[]} close={() => showSearch(false)} searchWorker={props.searchWorker} changeCoords={props.changeCoords} />}
     </section>
   )
+}
+
+LeftWidget.defaultProps = {
+  temperature: 'Loading temperature'
 }
 
 export default LeftWidget

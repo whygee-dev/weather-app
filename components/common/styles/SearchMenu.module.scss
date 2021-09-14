@@ -1,0 +1,110 @@
+@import 'colors';
+@import 'common';
+
+.container {
+    width: 100%;
+    height: 100vh;
+
+    display: grid;
+    grid-template-rows: 7.5% 10% 82.5%;
+
+    header {
+        display: flex;
+        justify-content: flex-end;
+        .closeIcon {
+            color: $white-smoke;
+            font-size: 32px;
+            margin-right: 20px;
+            cursor: pointer;
+            animation: pulse 1s;
+        }
+    }
+
+    .search {
+        @extend .flex-center;
+        margin: 0 30px;
+
+        position: relative;
+
+        input {
+            width: 67.5%;
+            height: 40%;
+            outline: 1px solid rgba(255, 255, 255, 0.7);
+            background-color: rgba(255, 255, 255, 0);
+            border: none;
+            color: $white-smoke;
+            margin-right: auto;
+            padding: 12.5px 35px;
+            padding-right: 0!important;
+
+            &::placeholder {
+                color: rgba(255, 255, 255, 0.3);
+            }
+
+            &:focus {
+                animation: pulse 1s;
+                box-shadow: 0 0 0 2em rgba(#fff,0);
+            }
+        }
+
+        .searchIcon {
+            color: rgba(255, 255, 255, 0.3);
+            position: absolute;
+            left: 6px;
+            top: 37.5%;
+        }
+    
+        .searchBtn {
+            background-color: $blue;
+            height: 40%;
+            width: 29%;
+            margin-left: auto;
+        }
+
+        .searchBtn:hover, .searchBtn:focus {
+            animation: pulse-blue 1s;
+            box-shadow: 0 0 0 2em rgba(#fff,0);
+        }
+    }
+
+    .searchResults {
+        overflow-y: scroll;
+        scrollbar-color: lightblue $dark-secondary;
+        scrollbar-width: auto;
+        
+        &::-webkit-scrollbar {
+            width: 1em;
+        }
+        &::-webkit-scrollbar-track {
+            background: $dark-secondary;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: $light-primary;
+        }
+        .location {
+            @extend .flex-center;
+
+            margin: 10px 15px 10px 30px;
+
+            &:hover {
+                outline: 2px solid rgba(255, 255, 255, 0.2);
+            }
+
+            cursor: pointer;
+            color: $white-smoke;
+
+            h3 {
+                margin-right: auto;
+                margin-left: 10px;
+            }
+
+            .arrowIcon {
+                margin-right: 10px;
+                margin-left: auto;
+                font-size: 20px;
+                opacity: 0.2;
+                text-align: right;
+            }
+        }
+    }
+}
