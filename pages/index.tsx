@@ -12,10 +12,12 @@ const Home: NextPage = () => {
   const [refreshDate, setRefreshDate] = useState(new Date());
   const [locationDate, setLocationDate] = useState(new Date()); 
   const [unit, setUnit] = useState<Unit>('C');
-  let  {location, state } = useLocation(locationDate);
+  let  { location, state } = useLocation(locationDate);
   const [coords, setCoords] = useState<Coordinates>(location!);
   const weather = useWeather(coords, unit, refreshDate);
 
+  console.log(location);
+  console.log(state);
   useEffect(() => setCoords({latitude: location?.latitude!, longitude: location?.longitude!}), [location])
 
   const _isValidWeather = (weather: any) => {

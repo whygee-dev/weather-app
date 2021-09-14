@@ -11,3 +11,10 @@
     margin: 10px 20px;
     max-width: 45%;
 }
+
+@media only screen and (max-width: 768px) {
+    .container {
+        max-width: 100%;
+        top: 35%;
+    }
+}
