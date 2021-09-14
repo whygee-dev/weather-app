@@ -44,7 +44,6 @@ const SearchMenu: React.FC<Props> = (props: Props) => {
             <section className={styles.search}>
                 <SearchIcon className={styles.searchIcon} />
                 <input type="text" name="search" placeholder="search location" value={search} onChange={(e) => setSearch(e.target.value)}/>
-                <button className={`btn ${styles.searchBtn}`}>Search</button>
             </section>
             <section className={styles.searchResults} ref={resultsContainerRef}>
             {

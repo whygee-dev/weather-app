@@ -6,6 +6,8 @@ export type Unit = 'C' | 'F';
 const useWeather = (coords: Coordinates | undefined, unit: Unit, date: Date): any => {
     const [weather, setWeather] = useState<any>();
 
+    const lastFetch = date.getTime();
+
     useEffect(() => {
         const fetchData = (async () => {
             if (!coords?.latitude || !coords?.longitude) {
@@ -19,7 +21,7 @@ const useWeather = (coords: Coordinates | undefined, unit: Unit, date: Date): an
         });
 
         fetchData();
-    }, [unit, coords?.latitude, coords?.longitude, date]);
+    }, [unit, coords?.latitude, coords?.longitude, lastFetch]);
 
     return weather;
 }

@@ -7,12 +7,13 @@ import useLocation, { Coordinates } from '../hooks/useLocation'
 import useWeather, { Unit } from '../hooks/useWeather'
 import ErrorMessage from '../components/common/ErrorMessage'
 import LoadingIndicator from '../components/common/LoadingIndicator'
+import SearchMenu from '../components/common/SearchMenu'
 
 const Home: NextPage = () => {
   const [refreshDate, setRefreshDate] = useState(new Date());
   const [locationDate, setLocationDate] = useState(new Date()); 
   const [unit, setUnit] = useState<Unit>('C');
-  let  { location, state } = useLocation(locationDate);
+  let  { location, state, locationError } = useLocation(locationDate);
   const [coords, setCoords] = useState<Coordinates>(location!);
   const weather = useWeather(coords, unit, refreshDate);
 
@@ -55,14 +56,10 @@ const Home: NextPage = () => {
     refresh();
   }
 
-  const useGeoloc = () => {
+  const geolocate = () => {
     setLocationDate(new Date());
   };
 
-  const geolocWarning = "Please grant location access permission in order to display weather information in your region. Alternatively, manually select your region in the \"Search for places\" section.";
-  const gpsUnavailableErr = "Please activate GPS in your device in order to use your location to display weather information.";
-
-  console.log(state)
   return (
     <main ref={mainRef} id="main" className={styles.container}>
       {!isLoading 
@@ -70,17 +67,15 @@ const Home: NextPage = () => {
         <>
           <LeftWidget temperature={String(Math.round(weather.current.temp))} unit={unit}
             isLoading={isLoading} description={weather.current.weather[0].description} 
-              weatherIcon={weather.current.weather[0].icon} useGeoloc={useGeoloc}
+              weatherIcon={weather.current.weather[0].icon} useGeoloc={geolocate}
                 refresh={refresh} city={weather.timezone} containerRef={mainRef}
                   searchWorker={workerRef} changeCoords={changeCoords}/>
           <RightWidget unit={unit} onUnitChange={changeUnit} 
             daysWeather={weather.daily.slice(0, 5)} highlights={highlights}/>
         </>
       )}
-      <ErrorMessage 
-        message={weather?.error || state === 'denied' ? geolocWarning : undefined  || state === 'gps_off' ? gpsUnavailableErr : undefined } 
-        errorDate={new Date()}/>
-      <LoadingIndicator visible={isLoading || state === 'prompt'} />
+      <ErrorMessage message={ weather?.error || locationError !== '' ? locationError : undefined } />
+      <LoadingIndicator visible={isLoading || state === 'prompt' } />
     </main>
   )
 }
