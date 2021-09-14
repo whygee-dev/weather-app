@@ -16,8 +16,6 @@ const Home: NextPage = () => {
   const [coords, setCoords] = useState<Coordinates>(location!);
   const weather = useWeather(coords, unit, refreshDate);
 
-  console.log(location);
-  console.log(state);
   useEffect(() => setCoords({latitude: location?.latitude!, longitude: location?.longitude!}), [location])
 
   const _isValidWeather = (weather: any) => {
@@ -64,6 +62,7 @@ const Home: NextPage = () => {
   const geolocWarning = "Please grant location access permission in order to display weather information in your region. Alternatively, manually select your region in the \"Search for places\" section.";
   const gpsUnavailableErr = "Please activate GPS in your device in order to use your location to display weather information.";
 
+  console.log(state)
   return (
     <main ref={mainRef} id="main" className={styles.container}>
       {!isLoading 
@@ -79,7 +78,7 @@ const Home: NextPage = () => {
         </>
       )}
       <ErrorMessage 
-        message={weather?.error || state === 'denied' ? geolocWarning : undefined || state === "gps_off" ? gpsUnavailableErr : undefined } 
+        message={weather?.error || state === 'denied' ? geolocWarning : undefined  } 
         errorDate={new Date()}/>
       <LoadingIndicator visible={isLoading || state === 'prompt'} />
     </main>

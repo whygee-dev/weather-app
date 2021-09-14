@@ -4,7 +4,7 @@ export type Coordinates = {latitude: number, longitude: number};
 export const defaultLocation = {latitude: 48.853401, longitude: 2.3486};
 
 const useLocation = (refreshDate: Date): { location: Coordinates | null | undefined , state: string | undefined } => {
-    const [coordinates, setCoordinates] = useState<Coordinates|null|undefined>();
+    const [coordinates, setCoordinates] = useState<Coordinates|null|undefined>(defaultLocation);
     const [state, setState] = useState<string>();
 
     useEffect(() => {
@@ -13,13 +13,14 @@ const useLocation = (refreshDate: Date): { location: Coordinates | null | undefi
                 if (result.state === 'prompt' || result.state === 'granted') {
                     navigator.geolocation.getCurrentPosition((position) => {
                         setCoordinates({latitude: position.coords.latitude, longitude: position.coords.longitude});
-                    }, (err) => {
+                    }, 
+                    (err) => {
                         console.log(err);
+                        setCoordinates(defaultLocation);
+                        setState('gps_off');
                     })
-                } else if (result.state === 'denied') {
-                    setCoordinates(defaultLocation);
-                }
-                console.log(result);
+                } 
+
                 result.onchange = () => {
                     setState(result.state);
                     if (result.state === 'denied') {
@@ -28,7 +29,6 @@ const useLocation = (refreshDate: Date): { location: Coordinates | null | undefi
                 }
             });
         } else {
-            console.log('passed');
             setCoordinates(defaultLocation);
             setState('gps_off');
         }
