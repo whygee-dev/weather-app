@@ -26,7 +26,8 @@ const useLocation = (refreshDate: Date): { location: Coordinates | null | undefi
                 }
             });
         } else {
-            setCoordinates(null);
+            setCoordinates(defaultLocation);
+            setState('gps_off');
         }
     }, [refreshDate]);
 

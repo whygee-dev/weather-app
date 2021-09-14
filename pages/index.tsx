@@ -59,7 +59,8 @@ const Home: NextPage = () => {
     setLocationDate(new Date());
   };
 
-  const geolocWarning = "Please grant location access permission in order to display weather info in your region. Alternatively, manually select your region in the \"Search for places\" section.";
+  const geolocWarning = "Please grant location access permission in order to display weather information in your region. Alternatively, manually select your region in the \"Search for places\" section.";
+  const gpsUnavailableErr = "Please activate GPS in your device in order to use your location to display weather information.";
 
   return (
     <main ref={mainRef} id="main" className={styles.container}>
@@ -75,7 +76,9 @@ const Home: NextPage = () => {
             daysWeather={weather.daily.slice(0, 5)} highlights={highlights}/>
         </>
       )}
-      <ErrorMessage message={weather?.error || state === 'denied' ? geolocWarning : undefined } errorDate={new Date()}/>
+      <ErrorMessage 
+        message={weather?.error || state === 'denied' ? geolocWarning : undefined || state === "gps_off" ? gpsUnavailableErr : undefined } 
+        errorDate={new Date()}/>
       <LoadingIndicator visible={isLoading || state === 'prompt'} />
     </main>
   )
