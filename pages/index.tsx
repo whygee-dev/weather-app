@@ -78,7 +78,7 @@ const Home: NextPage = () => {
         </>
       )}
       <ErrorMessage 
-        message={weather?.error || state === 'denied' ? geolocWarning : undefined  } 
+        message={weather?.error || state === 'denied' ? geolocWarning : undefined  || state === 'gps_off' ? gpsUnavailableErr : undefined } 
         errorDate={new Date()}/>
       <LoadingIndicator visible={isLoading || state === 'prompt'} />
     </main>
