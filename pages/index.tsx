@@ -69,12 +69,12 @@ const Home: NextPage = () => {
             isLoading={isLoading} description={weather.current.weather[0].description} 
               weatherIcon={weather.current.weather[0].icon} useGeoloc={geolocate}
                 refresh={refresh} city={weather.timezone} containerRef={mainRef}
-                  searchWorker={workerRef} changeCoords={changeCoords}/>
+                  searchWorker={workerRef} changeCoords={changeCoords} locationState={state}/>
           <RightWidget unit={unit} onUnitChange={changeUnit} 
             daysWeather={weather.daily.slice(0, 5)} highlights={highlights}/>
         </>
       )}
-      <ErrorMessage message={ weather?.error || locationError !== '' ? locationError : undefined } />
+      <ErrorMessage message={ weather?.error } />
       <LoadingIndicator visible={isLoading || state === 'prompt' } />
     </main>
   )

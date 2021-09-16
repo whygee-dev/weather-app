@@ -34,6 +34,7 @@ const useLocation = (
               latitude: position.coords.latitude,
               longitude: position.coords.longitude,
             });
+            setState('granted');
           },
           (err) => {
             console.error(err);
@@ -52,6 +53,7 @@ const useLocation = (
                   latitude: position.coords.latitude,
                   longitude: position.coords.longitude,
                 });
+                setState('granted');
               },
               (err) => {
                 console.error(err);
