@@ -32,6 +32,7 @@ const LeftWidget: React.FC<Props> = (props: Props) => {
   const today = new Date();
 
   const onScroll = () => {
+    ReactTooltip.hide();
     const main = props.containerRef.current;
     setScrollTop(Math.min(window.innerHeight, main.scrollTop));
   };
@@ -71,6 +72,7 @@ const LeftWidget: React.FC<Props> = (props: Props) => {
               Search for places
             </button>
             <section className={styles.controlBtns}>
+              <ReactTooltip place='bottom' effect='solid' insecure={false} />
               <button
                 className={`btn ${styles.geolocBtn}`}
                 onClick={props.useGeoloc}
@@ -197,7 +199,6 @@ const LeftWidget: React.FC<Props> = (props: Props) => {
           changeCoords={props.changeCoords}
         />
       )}
-      <ReactTooltip place='bottom' effect='solid' insecure={false} />
     </section>
   );
 };
