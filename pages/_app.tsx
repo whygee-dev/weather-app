@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#5bbad5"/>
         <meta name="msapplication-TileColor" content="#da532c"/>
         <meta name="theme-color" content="#ffffff"/>
-        <link rel="apple-touch-icon" href="/icons/apple-icon.png"></link>
+        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png"></link>
         <meta name="theme-color" content="#317EFB" />
       </Head>
       <Component {...pageProps} />
