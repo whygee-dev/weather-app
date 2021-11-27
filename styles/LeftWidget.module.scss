@@ -26,8 +26,12 @@
     background-color: $dark-secondary;
     position: relative;
     max-height: 100vh;
+    width: 32.5vw;
     display: grid;
     grid-template-rows: 12.5vh 30vh 57.5vh;
+    position: fixed;
+    top: 0;
+    left: 0;
 
     header {
         @extend .flex-center;
@@ -131,16 +135,15 @@
 
             color: $white-smoke;
 
-            .temperatureNumber::after {
-                content: attr(last-number);
-                font-size: 110px;
+            .temperatureNumber {
+                font-size: 100px;
+
+                &.bigger {
+                    font-size: 110px;
                 position: relative;
                 top: 5px;
                 left: 5px;
-            }
-
-            .temperatureNumber {
-                font-size: 100px;
+                }
             }
 
             .degree::after {
@@ -188,5 +191,12 @@
             @extend .flex-center;
             flex-direction: column;
         }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .container {
+        position: relative;
+        width: 100vw;
     }
 }

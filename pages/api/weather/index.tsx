@@ -9,7 +9,7 @@ const limiter = rateLimit({
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    await limiter.check(res, 10, 'CACHE_TOKEN')
+    await limiter.check(res, 100, 'CACHE_TOKEN')
 
     const { lat } = req.query
     const { lon } = req.query

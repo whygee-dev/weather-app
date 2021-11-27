@@ -28,18 +28,7 @@ type Props = {
 
 const LeftWidget: React.FC<Props> = (props: Props) => {
   const [searchVisible, showSearch] = useState(false);
-  const [scrollTop, setScrollTop] = useState(0);
   const today = new Date();
-
-  const onScroll = () => {
-    ReactTooltip.hide();
-    const main = props.containerRef.current;
-    setScrollTop(Math.min(window.innerHeight, main.scrollTop));
-  };
-
-  if (props.containerRef.current) {
-    props.containerRef.current.addEventListener("scroll", onScroll);
-  }
 
   const tooltipRef = useRef<any>();
 
@@ -58,10 +47,7 @@ const LeftWidget: React.FC<Props> = (props: Props) => {
   }, [props.locationState]);
 
   return (
-    <section
-      className={styles.container}
-      style={{ top: window.innerWidth > 768 ? scrollTop : undefined }}
-    >
+    <section className={styles.container}>
       {!searchVisible ? (
         <>
           <header className={styles.header}>
@@ -72,7 +58,7 @@ const LeftWidget: React.FC<Props> = (props: Props) => {
               Search for places
             </button>
             <section className={styles.controlBtns}>
-              <ReactTooltip place='bottom' effect='solid' insecure={false} />
+              <ReactTooltip place='bottom' effect='float' insecure={false} />
               <button
                 className={`btn ${styles.geolocBtn}`}
                 onClick={props.useGeoloc}
@@ -84,6 +70,7 @@ const LeftWidget: React.FC<Props> = (props: Props) => {
                     className="icon"
                     ref={tooltipRef}
                     data-tip="Geocation Permission denied or GPS Off"
+                    data-type="info"
                   />
                 )}
               </button>
@@ -155,11 +142,11 @@ const LeftWidget: React.FC<Props> = (props: Props) => {
               <h1>
                 {!props.isLoading ? (
                   <>
-                    <span
-                      className={styles.temperatureNumber}
-                      last-number={props.temperature.slice(-1)}
-                    >
-                      {props.temperature.charAt(0)}
+                    <span className={styles.temperatureNumber}>
+                      {props.temperature.charAt(0)} 
+                      <span className={`${styles.temperatureNumber} bigger`}>
+                        {props.temperature.length > 1 ? props.temperature.slice(-1) : ""}
+                      </span>
                     </span>
                     <span className={styles.degree} degree-unit={props.unit}>
                       <RadioButtonUncheckedIcon className={styles.degreeIcon} />

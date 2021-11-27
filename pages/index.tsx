@@ -7,7 +7,6 @@ import useLocation, { Coordinates } from '../hooks/useLocation'
 import useWeather, { Unit } from '../hooks/useWeather'
 import ErrorMessage from '../components/common/ErrorMessage'
 import LoadingIndicator from '../components/common/LoadingIndicator'
-import SearchMenu from '../components/common/SearchMenu'
 
 const Home: NextPage = () => {
   const [refreshDate, setRefreshDate] = useState(new Date());
@@ -16,8 +15,10 @@ const Home: NextPage = () => {
   let  { location, state, locationError } = useLocation(locationDate);
   const [coords, setCoords] = useState<Coordinates>(location!);
   const weather = useWeather(coords, unit, refreshDate);
-
-  useEffect(() => setCoords({latitude: location?.latitude!, longitude: location?.longitude!}), [location])
+  console.log(weather);
+  useEffect(() => {
+    setCoords({latitude: location?.latitude!, longitude: location?.longitude!})
+  }, [location]);
 
   const _isValidWeather = (weather: any) => {
     return weather && weather.current
@@ -34,8 +35,10 @@ const Home: NextPage = () => {
   const currentWeather = weather?.current;
 
   const highlights = {
-    wind: currentWeather?.wind_speed, visibility: currentWeather?.visibility, 
-    humidity: currentWeather?.humidity, pressure: currentWeather?.pressure,
+    wind: currentWeather?.wind_speed, 
+    visibility: currentWeather?.visibility, 
+    humidity: currentWeather?.humidity, 
+    pressure: currentWeather?.pressure,
     windDegree: currentWeather?.wind_deg,
   };
 
@@ -65,13 +68,25 @@ const Home: NextPage = () => {
       {!isLoading 
       && (
         <>
-          <LeftWidget temperature={String(Math.round(weather.current.temp))} unit={unit}
-            isLoading={isLoading} description={weather.current.weather[0].description} 
-              weatherIcon={weather.current.weather[0].icon} useGeoloc={geolocate}
-                refresh={refresh} city={weather.timezone} containerRef={mainRef}
-                  searchWorker={workerRef} changeCoords={changeCoords} locationState={state!}/>
-          <RightWidget unit={unit} onUnitChange={changeUnit} 
-            daysWeather={weather.daily.slice(0, 5)} highlights={highlights}/>
+          <LeftWidget 
+            temperature={String(Math.round(weather.current.temp))} 
+            unit={unit}
+            isLoading={isLoading} 
+            description={weather.current.weather[0].description} 
+            weatherIcon={weather.current.weather[0].icon} useGeoloc={geolocate}
+            refresh={refresh} 
+            city={weather.timezone} 
+            containerRef={mainRef}
+            searchWorker={workerRef} 
+            changeCoords={changeCoords} 
+            locationState={state!}
+          />
+          <RightWidget 
+            unit={unit} 
+            onUnitChange={changeUnit} 
+            daysWeather={weather.daily.slice(0, 5)} 
+            highlights={highlights}
+          />
         </>
       )}
       <ErrorMessage message={ weather?.error } />
