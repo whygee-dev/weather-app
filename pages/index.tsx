@@ -15,7 +15,7 @@ const Home: NextPage = () => {
   let  { location, state, locationError } = useLocation(locationDate);
   const [coords, setCoords] = useState<Coordinates>(location!);
   const weather = useWeather(coords, unit, refreshDate);
-  console.log(weather);
+
   useEffect(() => {
     setCoords({latitude: location?.latitude!, longitude: location?.longitude!})
   }, [location]);
