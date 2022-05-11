@@ -57,11 +57,9 @@
             width: 1200px;
         }
     }
-}
 
+    @media (max-width: 1024px) {
 
-@media (max-width: 1024px) {
-    .container {
         margin: auto;
         width: 90vw;
 
@@ -72,16 +70,11 @@
         .daysWeather {
             width: 100%;
             margin-bottom: 50px;
-            justify-content: space-around;
             margin: auto;
         }
 
         .highlights {
             width: 100%;
-
-            .cards {
-                justify-content: space-around;
-            }
 
             h2 {
                 text-align: center;
@@ -90,4 +83,12 @@
             margin: auto;
         }
     }
+
+    @media (max-width: 568px) {
+        .daysWeather, .highlights .cards {
+            justify-content: center;
+        }
+    }
+    
 }
+
