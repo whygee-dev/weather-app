@@ -53,12 +53,20 @@
             justify-content: space-evenly;
             width: 90px;
 
+            > div {
+                z-index: 100000000000000000000000000;
+            }
+
             .geolocBtn, .refreshBtn {
                 @extend .flex-center;
     
                 height: 35px;
                 width: 35px;
                 border-radius: 17.5px;
+
+                * {
+                    outline: none;
+                }
             }
             
     
@@ -194,7 +202,7 @@
     }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
     .container {
         position: relative;
         width: 100vw;

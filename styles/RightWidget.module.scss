@@ -5,17 +5,17 @@
     background-color: $dark-primary;
     z-index: 1;
     color: $white-smoke;
-    display: grid;
-    grid-template-columns: 10% 90%;
-    grid-template-rows: 12.5vh auto;
-    width: 67.5vw;
+    display: flex;
+    flex-direction: column;
+    width: 62.5vw;
+    max-width: 1500px;
     margin-left: 32.5vw;
 
     header {
         display: flex;
-        width: 90.5%;
         justify-content: flex-end;
         align-items: center;
+
         .celciusBtn, .fahrenBtn {
             @extend .flex-center;
             width: 35px;
@@ -30,60 +30,64 @@
                 color: $dark-primary;
             }
         }
-        grid-column-start: 2;
-        margin: 10px 0;
+
+        margin: 40px 0;
     }
     
     .daysWeather {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        width: 90%;
-
-        grid-column-start: 2;
-        gap: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-left: 50px
     }
 
     .highlights {
-        grid-column-start: 2;
-        
+        margin: auto 0 100px 50px;
+
         .cards {
-            display: grid;
-            width: 90%;
-            gap: 20px;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+    }
+
+    @media (min-width: 2000px) {
+        .daysWeather, .highlights {
+            margin-left: auto !important;
+            width: 1200px;
         }
     }
 }
 
 
-@media only screen and (max-width: 768px) {
+@media (max-width: 1024px) {
     .container {
-        margin: 0;
-        width: 100vw;
-        grid-template-columns: 1% 99%;
+        margin: auto;
+        width: 90vw;
 
         header {
-            margin: auto;
-            width: 92.5%;
             padding: 20px 5px 20px 0 ;
         }
 
         .daysWeather {
-            width: 92.5%!important;
+            width: 100%;
+            margin-bottom: 50px;
+            justify-content: space-around;
             margin: auto;
         }
 
         .highlights {
-            width: 92.5%!important;
-            margin: auto;
+            width: 100%;
+
+            .cards {
+                justify-content: space-around;
+            }
+
             h2 {
                 text-align: center;
             }
-            .cards {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))!important;
-                width: 100%!important;
-            }
-            
+
+            margin: auto;
         }
     }
 }

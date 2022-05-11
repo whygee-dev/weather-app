@@ -3,7 +3,7 @@ import Image from "next/image";
 import GpsFixedIcon from "@material-ui/icons/GpsFixed";
 import RoomIcon from "@material-ui/icons/Room";
 import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
-import { LegacyRef, useEffect, useRef, useState } from "react";
+import {  useEffect, useRef, useState } from "react";
 import SearchMenu from "../common/SearchMenu";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import { Unit } from "../../hooks/useWeather";
@@ -58,7 +58,7 @@ const LeftWidget: React.FC<Props> = (props: Props) => {
               Search for places
             </button>
             <section className={styles.controlBtns}>
-              <ReactTooltip place='bottom' effect='float' insecure={false} />
+              <ReactTooltip place='left' effect='float' insecure={false} />
               <button
                 className={`btn ${styles.geolocBtn}`}
                 onClick={props.useGeoloc}

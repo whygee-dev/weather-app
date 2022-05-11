@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
         <meta name="description" content="Description" />
         <meta name="keywords" content="Keywords" />
-        <title>Weather App</title>
+        <title>Weather</title>
 
         <link rel="manifest" href="/icons/manifest.json" />
         <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png"/>
